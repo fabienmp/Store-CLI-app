@@ -19,7 +19,7 @@ var menuOptions = [{
 
 var addToInventoryInputs = [{
         name: 'item_id',
-        message: 'Which item would you like to add to inventory?',
+        message: 'Input an item id:',
         type: 'input',
         validate: function (value) {
             if (isNaN(value) === false && value != '') {
@@ -29,8 +29,8 @@ var addToInventoryInputs = [{
         }
     },
     {
-        name: 'item_id',
-        message: 'Which quantity?',
+        name: 'quantity',
+        message: 'Input a quantity:',
         type: 'input',
         validate: function (value) {
             if (isNaN(value) === false && value != '') {
@@ -111,16 +111,14 @@ function ShowMenuOptions() {
                 connection.end();
                 break;
         }
-
     });
 }
 
 function ViewProductsForSale() {
-    con.query("SELECT item_id as 'ID', PRODUCT_NAME as 'Product Name', price as 'Price' FROM PRODUCTS", function (err, result, fields) {
+    con.query("SELECT item_id as 'ID', PRODUCT_NAME as 'Product Name', price as 'Price', stock_quantity as 'Inventory Left' FROM PRODUCTS", function (err, result, fields) {
         if (err) throw err;
         var dataTable = table_formatter.getTable(result);
-        totalProducts = result.length;
-        console.log('\n--- Available Products (' + totalProducts + ') ---\n')
+        console.log('\n--- Available Products (' + result.length + ') ---\n')
         console.log(dataTable);
         ShowMenuOptions();
     });
@@ -132,19 +130,57 @@ function ViewLowInventory() {
         function (err, result, fields) {
             if (err) throw err;
             var dataTable = table_formatter.getTable(result);
-            totalProducts = result.length;
-            console.log('\n--- Products with Low Inventory (' + totalProducts + ') ---\n')
+            console.log('\n--- Products with Low Inventory (' + result.length + ') - Threshold: < 50 ---\n')
             console.log(dataTable);
             ShowMenuOptions();
         });
 }
 
 function AddToInventory() {
+    inquirer.prompt(addToInventoryInputs).then(function (answers) {
+        var query = 'UPDATE PRODUCTS SET stock_quantity = (stock_quantity + ?) WHERE item_id = ?';
+        console.log(answers);
+        con.query(query, [answers.quantity, answers.item_id],
+            function (err, result, fields) {
+                if (err) throw err;
 
+                con.query("SELECT item_id as 'ID', PRODUCT_NAME as 'Product Name', price as 'Price', stock_quantity as 'Inventory Left' FROM PRODUCTS WHERE item_id = ?", [answers.item_id], function (err, result, fields) {
+                    if (err) throw err;
+                    var dataTable = table_formatter.getTable(result);
+                    console.log('\n--- Updated Inventory for Product ---\n')
+                    console.log(dataTable);
+                    ShowMenuOptions();
+                });
+
+            });
+    });
 }
 
 function AddNewProduct() {
+    inquirer.prompt(newProductInputs).then(function (answers) {
+        var query = 'INSERT INTO PRODUCTS (product_name, department_name, price, stock_quantity)' +
+            'VALUES (?, ?, ?, ?);';
 
+        con.query(query, [answers.name, answers.department, answers.price, answers.initial_quantity],
+            function (err, result, fields) {
+                if (err) throw err;
+
+                con.query("SELECT LAST_INSERT_ID() AS ID", function (err, result, fields) {
+                    if (err) throw err;
+                    var lastInsertId = result[0].ID;
+                    console.log(lastInsertId);
+
+                    con.query("SELECT item_id as 'ID', PRODUCT_NAME as 'Product Name', price as 'Price', stock_quantity as 'Inventory Left' FROM PRODUCTS WHERE item_id = ?", [lastInsertId], function (err, result, fields) {
+                        if (err) throw err;
+                        var dataTable = table_formatter.getTable(result);
+                        console.log('\n--- Added New Product ---\n')
+                        console.log(dataTable);
+                        ShowMenuOptions();
+                    });
+
+                });
+            });
+    });
 }
 
 con.connect(function (err) {
