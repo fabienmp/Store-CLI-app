@@ -18,3 +18,8 @@ CREATE TABLE department (
 	over_head_costs decimal(10,2) NULL,
     PRIMARY KEY (department_id)
 );
+
+ALTER TABLE PRODUCTS 
+ADD COLUMN `product_sales` DECIMAL(10,2);
+
+UPDATE products SET product_sales = 0 WHERE item_id > 0;

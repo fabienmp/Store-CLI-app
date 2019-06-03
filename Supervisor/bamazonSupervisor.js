@@ -19,7 +19,7 @@ var menuOptions = [{
 
 var newDepartmentInputs = [{
         name: 'name',
-        message: 'Input Product Name:',
+        message: 'Input Dept. Name:',
         type: 'input',
         validate: function (value) {
             if (value != '') {
@@ -61,7 +61,13 @@ function ShowMenuOptions() {
 }
 
 function ViewProductSalesDepartment() {
-    con.query("SELECT item_id as 'ID', PRODUCT_NAME as 'Product Name', price as 'Price', stock_quantity as 'Inventory Left' FROM PRODUCTS", function (err, result, fields) {
+    con.query("SELECT " +
+    "D.department_id as 'Dept. Id', " +
+    "D.department_name as 'Dept. Name', " +
+    "D.over_head_costs as 'Overhead Costs', " +
+    "P.product_sales as 'Product Sales', " +
+    "(P.product_sales - D.over_head_costs) as 'Total Profit' FROM DEPARTMENT D " +
+    "JOIN (SELECT department_name, SUM(product_sales) as product_sales FROM PRODUCTS GROUP BY department_name) P ON D.department_name = P.department_name;", function (err, result, fields) {
         if (err) throw err;
         var dataTable = table_formatter.getTable(result);
         console.log('\n--- Product Sales by Department ---\n')
