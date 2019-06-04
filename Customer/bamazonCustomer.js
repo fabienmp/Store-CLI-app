@@ -17,7 +17,7 @@ var questions = [{
     type: "input",
     message: "Please input the Id of the product you'd like to purchase: ",
     validate: function (value) {
-      if (isNaN(value) === false && value != '' && value < totalProducts) {
+      if (isNaN(value) === false && value != '' && value <= totalProducts) {
         return true;
       }
       return false;
@@ -66,16 +66,20 @@ function askCustomer() {
 
       if (answers.total_units > total_units_left) {
         console.log('Insufficient quantity! -- Current quantity left: ' + res[0].stock_quantity);
+        listProducts();
       } else {
         var query = "UPDATE PRODUCTS SET stock_quantity = ? WHERE item_id = ?";
         con.query(query, [total_units_left - answers.total_units, answers.product_id], function (err, res) {
           if (err) throw err;
-          console.log('\nOrder Processed! -- Total Cost: $' + total_cost.toFixed(2) + ' -- Unit(s) left: ' + (total_units_left - answers.total_units) + '\n');
+
+          var query = "UPDATE PRODUCTS SET product_sales = (product_sales + ?) WHERE item_id = ?";
+          con.query(query, [total_cost, answers.product_id], function (err, res) {
+            if (err) throw err;
+            console.log('\nOrder Processed! -- Total Cost: $' + total_cost.toFixed(2) + ' -- Unit(s) left: ' + (total_units_left - answers.total_units) + '\n');
+            listProducts();
+          });
         });
       }
-
-      listProducts();
-
     });
   });
 }
