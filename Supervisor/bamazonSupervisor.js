@@ -65,9 +65,9 @@ function ViewProductSalesDepartment() {
     "D.department_id as 'Dept. Id', " +
     "D.department_name as 'Dept. Name', " +
     "D.over_head_costs as 'Overhead Costs', " +
-    "P.product_sales as 'Product Sales', " +
-    "(P.product_sales - D.over_head_costs) as 'Total Profit' FROM DEPARTMENT D " +
-    "JOIN (SELECT department_name, SUM(product_sales) as product_sales FROM PRODUCTS GROUP BY department_name) P ON D.department_name = P.department_name;", function (err, result, fields) {
+    "(CASE WHEN P.product_sales IS NULL THEN 0.00 ELSE P.product_sales END) as 'Product Sales', " +
+    "((CASE WHEN P.product_sales IS NULL THEN 0.00 ELSE P.product_sales END) - D.over_head_costs) as 'Total Profit' FROM DEPARTMENT D " +
+    "LEFT OUTER JOIN (SELECT department_name, SUM(product_sales) as product_sales FROM PRODUCTS GROUP BY department_name) P ON D.department_name = P.department_name;", function (err, result, fields) {
         if (err) throw err;
         var dataTable = table_formatter.getTable(result);
         console.log('\n--- Product Sales by Department ---\n')
