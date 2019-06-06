@@ -88,7 +88,7 @@ function CreateNewDepartment() {
                 con.query("SELECT LAST_INSERT_ID() AS ID", function (err, result, fields) {
                     if (err) throw err;
                     var lastInsertId = result[0].ID;
-                    console.log(lastInsertId);
+                    //console.log(lastInsertId);
 
                     con.query("SELECT department_id as 'ID', department_name as 'Dept. Name', over_head_costs as 'Over Head Costs' FROM DEPARTMENT WHERE department_id = ?", [lastInsertId], function (err, result, fields) {
                         if (err) throw err;
