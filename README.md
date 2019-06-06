@@ -8,11 +8,14 @@ The three roles represented are Customermer, Manager and Supervisor.
 ## Customer Point of View
 
 In this app, we simulate the purchase of a product by a customer. 
-The app first prompts prompts the customer for the ID of the product they would like to buy.
-After that, the app requires the customer to input the total number of units for the the product they would like to buy.
-Once the customer has placed the order, the application checks wether the store has enough inventory and process the order if possible.
-If the inventory is too low, an error message is displayed. If the order is validated, the price of the product multiplied by the quantity purchased 
-is added to the product's product_sales column in the Product table.
+
+	* The app first prompts prompts the customer for the ID of the product they would like to buy.
+	
+	* After that, the app requires the customer to input the total number of units for the the product they would like to buy.
+
+	* Once the order request is placed, the application checks whether the store has enough inventory and process the order if possible.
+	
+	* If the inventory is too low, an error message is displayed. If the order is validated, the price of the product multiplied by the quantity purchased is added to the product_sales column in the Product table.
 
 ## Manager Point of View
 

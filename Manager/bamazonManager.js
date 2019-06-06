@@ -140,7 +140,7 @@ function AddToInventory() {
     inquirer.prompt(addToInventoryInputs).then(function (answers) {
         var query = 'UPDATE PRODUCTS SET stock_quantity = (stock_quantity + ?) WHERE item_id = ?';
         console.log(answers);
-        con.query(query, [answers.quantity, answers.item_id],
+        //con.query(query, [answers.quantity, answers.item_id],
             function (err, result, fields) {
                 if (err) throw err;
 
@@ -168,7 +168,7 @@ function AddNewProduct() {
                 con.query("SELECT LAST_INSERT_ID() AS ID", function (err, result, fields) {
                     if (err) throw err;
                     var lastInsertId = result[0].ID;
-                    console.log(lastInsertId);
+                    //console.log(lastInsertId);
 
                     con.query("SELECT item_id as 'ID', PRODUCT_NAME as 'Product Name', price as 'Price', stock_quantity as 'Inventory Left' FROM PRODUCTS WHERE item_id = ?", [lastInsertId], function (err, result, fields) {
                         if (err) throw err;

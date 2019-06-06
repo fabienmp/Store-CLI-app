@@ -65,7 +65,7 @@ function askCustomer() {
       var total_cost = product_price * answers.total_units;
 
       if (answers.total_units > total_units_left) {
-        console.log('Insufficient quantity! -- Current quantity left: ' + res[0].stock_quantity);
+        console.log('\nInsufficient quantity! -- Current quantity left: ' + res[0].stock_quantity);
         listProducts();
       } else {
         var query = "UPDATE PRODUCTS SET stock_quantity = ? WHERE item_id = ?";
