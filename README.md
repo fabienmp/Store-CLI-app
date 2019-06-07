@@ -9,19 +9,19 @@ The three roles represented are Customermer, Manager and Supervisor.
 
 In this app, we simulate the purchase of a product by a customer. 
 
-	* The app first prompts prompts the customer for the ID of the product they would like to buy.
+* The app first prompts prompts the customer for the ID of the product they would like to buy.
 
-	* After that, the app requires the customer to input the total number of units for the the product they would like to buy.
+* After that, the app requires the customer to input the total number of units for the the product they would like to buy.
 
-    ![Product Selection](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/customer_app_order_validated.PNG?raw=true)
+![Product Selection](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/customer_app_order_validated.PNG?raw=true)
 
-	* Once the order request is placed, the application checks whether the store has enough inventory and process the order if possible.
+* Once the order request is placed, the application checks whether the store has enough inventory and process the order if possible.
 	
-    ![Order Rejected](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/customer_app_order_rejected.PNG?raw=true)
+![Order Rejected](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/customer_app_order_rejected.PNG?raw=true)
 
-	* If the inventory is too low, an error message is displayed. If the order is validated, the price of the product multiplied by the quantity purchased is added to the product_sales column in the Product table.
+* If the inventory is too low, an error message is displayed. If the order is validated, the price of the product multiplied by the quantity purchased is added to the product_sales column in the Product table.
 
-    ![Order Placed](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/customer_app_order_placed.PNG?raw=true)
+![Order Placed](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/customer_app_order_placed.PNG?raw=true)
 
 ## Manager Point of View
 
