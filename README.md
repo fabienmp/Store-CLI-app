@@ -27,33 +27,33 @@ In this app, we simulate the purchase of a product by a customer.
 
 This application simulate the manager point of view in the store. It allows four different actions:
 
-	* View Products for Sale: A list of every available item.
+* View Products for Sale: A list of every available item.
 
-    ![Products for Sale](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/view_products.PNG?raw=true)
+![Products for Sale](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/view_products.PNG?raw=true)
 
-    * View Low Inventory: A list all items with an inventory count lower than fifty.
+* View Low Inventory: A list all items with an inventory count lower than fifty.
     
-    ![View Low Inventory](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/low_inventory.PNG?raw=true)
+![View Low Inventory](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/low_inventory.PNG?raw=true)
 
-    * Add to Inventory: This options let the manager "add more" of any item currently in the store.
+* Add to Inventory: This options let the manager "add more" of any item currently in the store.
     
-    ![Add To Inventory](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/add_to_inventory.PNG?raw=true)
+![Add To Inventory](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/add_to_inventory.PNG?raw=true)
 
-    * Add New Product: This option allow the manager to add a completely new product to the store.
+* Add New Product: This option allow the manager to add a completely new product to the store.
 
-    ![Add Product](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/add_product.PNG?raw=true)
+![Add Product](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/add_product.PNG?raw=true)
 
 ## Supervisor Point of View
 
 This application simulate the supervisor point of view in the store. It allows two different actions:
 
-    * View Product Sales by Department: This creates a summary by department displaying the profits and overhead costs. The profit is calulated by substracting from the overhead cost, the sum of all the orders made by custumers for a given department.
+* View Product Sales by Department: This creates a summary by department displaying the profits and overhead costs. The profit is calulated by substracting from the overhead cost, the sum of all the orders made by custumers for a given department.
    
-    ![View Product Sales](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/view_products.PNG?raw=true)
+![View Product Sales](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/view_products.PNG?raw=true)
 
-    * Create New Department: This allows the supervisor to create a new store department.
+* Create New Department: This allows the supervisor to create a new store department.
 
-    ![Create New Department](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/add_department.PNG?raw=true)
+![Create New Department](https://github.com/fabienmp/Store-CLI-app/blob/master/Images/add_department.PNG?raw=true)
 
 ## Author
 
